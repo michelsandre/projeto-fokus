@@ -4,6 +4,16 @@ const btnCurto = document.querySelector(".app__card-button--curto");
 const btnLongo = document.querySelector(".app__card-button--longo");
 const btnAll = document.querySelectorAll(".app__card-button");
 const imagem = document.querySelector(".app__image");
+const titulo = document.querySelector(".app__title");
+
+const listaTitulos = [
+  `Otimize sua produtividade,<br />
+  <strong class="app__title-strong">mergulhe no que importa.</strong>`,
+  `Que tal uma respirada?<br />
+  <strong class="app__title-strong">Faça uma pausa curta.</strong>`,
+  `Hora de voltar à superfície.<br />
+  <strong class="app__title-strong">Faça uma pausa longa.</strong>`,
+];
 
 btnFoco.addEventListener("click", () => {
   desativaBotoes();
@@ -26,6 +36,23 @@ btnLongo.addEventListener("click", () => {
 function alteraContexto(contexto) {
   html.setAttribute("data-contexto", contexto);
   imagem.setAttribute("src", `/imagens/${contexto}.png`);
+
+  switch (contexto) {
+    case "foco":
+      titulo.innerHTML = listaTitulos[0];
+
+      break;
+    case "descanso-curto":
+      titulo.innerHTML = listaTitulos[1];
+
+      break;
+    case "descanso-longo":
+      titulo.innerHTML = listaTitulos[2];
+
+      break;
+    default:
+      console.log("switch error");
+  }
 }
 function desativaBotoes() {
   btnAll.forEach((item) => {
