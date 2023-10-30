@@ -6,14 +6,14 @@ const btnAll = document.querySelectorAll(".app__card-button");
 const imagem = document.querySelector(".app__image");
 const titulo = document.querySelector(".app__title");
 
-const listaTitulos = [
-  `Otimize sua produtividade,<br />
+const objTitulos = {
+  foco: `Otimize sua produtividade,<br />
   <strong class="app__title-strong">mergulhe no que importa.</strong>`,
-  `Que tal uma respirada?<br />
+  descansoCurto: `Que tal uma respirada?<br />
   <strong class="app__title-strong">Faça uma pausa curta.</strong>`,
-  `Hora de voltar à superfície.<br />
+  descansoLongo: `Hora de voltar à superfície.<br />
   <strong class="app__title-strong">Faça uma pausa longa.</strong>`,
-];
+};
 
 btnFoco.addEventListener("click", () => {
   desativaBotoes();
@@ -39,15 +39,15 @@ function alteraContexto(contexto) {
 
   switch (contexto) {
     case "foco":
-      titulo.innerHTML = listaTitulos[0];
+      titulo.innerHTML = objTitulos.foco;
 
       break;
     case "descanso-curto":
-      titulo.innerHTML = listaTitulos[1];
+      titulo.innerHTML = objTitulos.descansoCurto;
 
       break;
     case "descanso-longo":
-      titulo.innerHTML = listaTitulos[2];
+      titulo.innerHTML = objTitulos.descansoLongo;
 
       break;
     default:
