@@ -1,3 +1,4 @@
+// Objetos
 const html = document.querySelector("html");
 const btnFoco = document.querySelector(".app__card-button--foco");
 const btnCurto = document.querySelector(".app__card-button--curto");
@@ -7,9 +8,7 @@ const imagem = document.querySelector(".app__image");
 const titulo = document.querySelector(".app__title");
 const musicaFocoInput = document.querySelector("#alternar-musica");
 const btnStartPause = document.querySelector("#start-pause");
-const btnStartPauseArrow = document
-  .querySelector("#start-pause")
-  .querySelector("img");
+const tempoNaTela = document.querySelector("#timer");
 
 // Adicionar arquivo de audio e tocar
 const musica = new Audio("/sons/luna-rise-part-one.mp3");
@@ -19,10 +18,12 @@ const musicaPlay = new Audio("/sons/play.wav");
 const musicaPause = new Audio("/sons/pause.mp3");
 const musicaFinalizado = new Audio("/sons/beep.mp3");
 
-//Temporizador
-let tempoDecorridoEmSegundos = 5;
+// Temporizador
+let tempoDecorrido = 25 * 60; // segundos
 let intervaloId;
+mostrarTempo();
 
+// Titulos em função do contexto
 const objTitulos = {
   foco: `Otimize sua produtividade,<br />
   <strong class="app__title-strong">mergulhe no que importa.</strong>`,
@@ -32,6 +33,7 @@ const objTitulos = {
   <strong class="app__title-strong">Faça uma pausa longa.</strong>`,
 };
 
+// Eventos
 musicaFocoInput.addEventListener("change", () => {
   if (musica.paused) {
     musica.play();
@@ -55,6 +57,9 @@ btnLongo.addEventListener("click", () => {
   btnLongo.classList.add("active");
 });
 
+btnStartPause.addEventListener("click", iniciarOuPausar);
+
+// Altera contexto
 function alteraContexto(contexto) {
   html.setAttribute("data-contexto", contexto);
   imagem.setAttribute("src", `/imagens/${contexto}.png`);
@@ -62,14 +67,17 @@ function alteraContexto(contexto) {
   switch (contexto) {
     case "foco":
       titulo.innerHTML = objTitulos.foco;
+      tempoDecorrido = 25 * 60;
 
       break;
     case "descanso-curto":
       titulo.innerHTML = objTitulos.descansoCurto;
+      tempoDecorrido = 5 * 60;
 
       break;
     case "descanso-longo":
       titulo.innerHTML = objTitulos.descansoLongo;
+      tempoDecorrido = 15 * 60;
 
       break;
     default:
@@ -77,25 +85,30 @@ function alteraContexto(contexto) {
   }
 
   desativaBotoes();
+  mostrarTempo();
 }
+
+// Desativa os botoes
 function desativaBotoes() {
   botoes.forEach((item) => {
     item.classList.remove("active");
   });
 }
 
+// Contagem regressiva
 const contagemRegressiva = () => {
-  if (tempoDecorridoEmSegundos <= 0) {
+  if (tempoDecorrido <= 0) {
     zerar();
     musicaFinalizado.play();
+    alternaBotaoPlayPause("play");
     return;
   }
-  tempoDecorridoEmSegundos -= 1;
-  console.log(`Temporizador: ${tempoDecorridoEmSegundos}`);
+  tempoDecorrido -= 1;
+  mostrarTempo();
+  console.log(`Temporizador: ${tempoDecorrido}`);
 };
 
-btnStartPause.addEventListener("click", iniciarOuPausar);
-
+// Iniciar ou pausar timer
 function iniciarOuPausar() {
   if (intervaloId) {
     zerar();
@@ -107,20 +120,46 @@ function iniciarOuPausar() {
   alternaBotaoPlayPause("pause");
   intervaloId = setInterval(contagemRegressiva, 1000);
 }
+
+// Zerar contador
 function zerar() {
   clearInterval(intervaloId);
   intervaloId = null;
 }
 
+// Alterna botão entre play e pause
 function alternaBotaoPlayPause(status) {
   switch (status) {
     case "play":
-      btnStartPauseArrow.setAttribute("src", "/imagens/play_arrow.png");
+      btnStartPause
+        .querySelector("img")
+        .setAttribute("src", "/imagens/play_arrow.png");
       btnStartPause.querySelector("span").textContent = "Começar";
       break;
     case "pause":
-      btnStartPauseArrow.setAttribute("src", "/imagens/pause.png");
+      btnStartPause
+        .querySelector("img")
+        .setAttribute("src", "/imagens/pause.png");
       btnStartPause.querySelector("span").textContent = "Pausar";
       break;
   }
+}
+
+// Mostra o tempo na tela
+function mostrarTempo() {
+  // let tempo =
+  //   tempoDecorrido >= 60
+  //     ? parseInt(tempoDecorrido / 60) +
+  //       ":" +
+  //       (tempoDecorrido % 60).toLocaleString(undefined, {
+  //         minimumIntegerDigits: 2,
+  //       })
+  //     : "0:" + tempoDecorrido;
+  let tempo = new Date(tempoDecorrido * 1000); // para milisegundos;
+  let tempoFormatado = tempo.toLocaleString(undefined, {
+    minute: "2-digit",
+    second: "2-digit",
+  });
+
+  tempoNaTela.innerHTML = tempoFormatado;
 }
