@@ -1,4 +1,8 @@
+// Elementos
 const taskListContainer = document.querySelector(".app__section-task-list");
+const formTask = document.querySelector(".app__form-add-task");
+const toggleFormTaskBtn = document.querySelector(".app__button--add-task");
+const formLabel = document.querySelector(".app__form-label");
 
 let tarefas = [
   { descricao: "Tarafe concluida", concluida: true },
@@ -39,3 +43,8 @@ function createTask(task) {
   li.appendChild(paragraph);
   return li;
 }
+
+toggleFormTaskBtn.addEventListener("click", () => {
+  formLabel.textContent = "Adicionando tarefas";
+  formTask.classList.toggle("hidden");
+});
