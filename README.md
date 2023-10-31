@@ -4,7 +4,11 @@ Práitica de lógica de programação através deste desafio de um aplicativo de
 
 ## 🚀 Funcionalidades
 
--
+- Timer regressivo para Foco
+- Timer regressivo para Descanso Curto
+- Timer regressivo para Descanso Longo
+- Utilização de audio
+- Uso de formatação dos minutos e segundos utilizando `toLocaleString(undefined, {minute: '2-digit',second: '2-digit'})`
 
 ## 🛠 Tecnologia aplicada
 
@@ -12,10 +16,18 @@ Javascript, HTML, CSS...
 
 ## 🕹 Uso/Exemplos
 
-#### Função
+#### Função de mostra tempo na tela formatado
 
 ```javascript
+function mostrarTempo() {
+  let tempo = new Date(tempoDecorrido * 1000); // para milisegundos;
+  let tempoFormatado = tempo.toLocaleString(undefined, {
+    minute: "2-digit",
+    second: "2-digit",
+  });
 
+  tempoNaTela.innerHTML = tempoFormatado;
+}
 ```
 
 ## Design do projeto
