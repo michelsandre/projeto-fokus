@@ -32,7 +32,7 @@ function mostrarTempo() {
 
 ## Design do projeto
 
-Layout do projeto no Figma: [Link](https://www.figma.com/file/dEaMv34Wd5G7TBMPo8fPlK/Projeto-Fokus?type=design&node-id=35-181&mode=design)
+Projeto do Design Fokus no Figma: [Link](https://www.figma.com/file/dEaMv34Wd5G7TBMPo8fPlK/Projeto-Fokus?type=design&node-id=35-181&mode=design)
 
 ## Autores
 
