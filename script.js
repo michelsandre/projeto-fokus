@@ -19,7 +19,7 @@ const musicaPause = new Audio("/sons/pause.mp3");
 const musicaFinalizado = new Audio("/sons/beep.mp3");
 
 // Temporizador
-let tempoDecorrido = 1 * 60; // segundos
+let tempoDecorrido = 25 * 60; // segundos
 let intervaloId;
 mostrarTempo();
 
