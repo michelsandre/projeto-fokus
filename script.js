@@ -99,13 +99,27 @@ function desativaBotoes() {
 const contagemRegressiva = () => {
   if (tempoDecorrido <= 0) {
     zerar();
-    musicaFinalizado.play();
+    // musicaFinalizado.play();
     alternaBotaoPlayPause("play");
+
+    const focoAtivo = html.getAttribute("data-contexto") === "foco";
+    if (focoAtivo) {
+      var event = new CustomEvent("TarefaFinalizada", {
+        detail: {
+          message: "A tarefa foi concluída com sucesso",
+          time: new Date(),
+        },
+        bubbles: true,
+        cancelable: true,
+      });
+      document.dispatchEvent(event);
+      tempoDecorrido = 5;
+      mostrarTempo();
+    }
     return;
   }
   tempoDecorrido -= 1;
   mostrarTempo();
-  console.log(`Temporizador: ${tempoDecorrido}`);
 };
 
 // Iniciar ou pausar timer
