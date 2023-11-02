@@ -19,7 +19,7 @@ const musicaPause = new Audio("/sons/pause.mp3");
 const musicaFinalizado = new Audio("/sons/beep.mp3");
 
 // Temporizador
-let tempoDecorrido = 25 * 60; // segundos
+let tempoDecorrido = 1 * 60; // segundos
 let intervaloId;
 mostrarTempo();
 
@@ -99,7 +99,7 @@ function desativaBotoes() {
 const contagemRegressiva = () => {
   if (tempoDecorrido <= 0) {
     zerar();
-    // musicaFinalizado.play();
+    musicaFinalizado.play();
     alternaBotaoPlayPause("play");
 
     const focoAtivo = html.getAttribute("data-contexto") === "foco";
