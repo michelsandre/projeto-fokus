@@ -1,14 +1,14 @@
 # Projeto Fokus
 
-Práitica de lógica de programação através deste desafio de um aplicativo de timer pomodoro.
+Práitica de lógica de programação do curso da Alura através deste desafio de um aplicativo de timer pomodoro.
 
 ## 🚀 Funcionalidades
 
-- Timer regressivo para Foco
-- Timer regressivo para Descanso Curto
-- Timer regressivo para Descanso Longo
-- Utilização de audio
+- Timer regressivo para foco, descanso curto e descanso longo
+- Utilização de audio para concentração
 - Uso de formatação dos minutos e segundos utilizando `toLocaleString(undefined, {minute: '2-digit',second: '2-digit'})`
+- Utilização de `localStorage()` para armazenamento das tarefas
+- Evento de concluir tarefa ao término do tempo através da função ` var event = new CustomEvent()`
 
 ## 🛠 Tecnologia aplicada
 
